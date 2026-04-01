@@ -1,94 +1,155 @@
 # 🎙️ Speech-to-Meaning Translator
-
-Convert speech to text, enhance it with AI, and translate into 60+ languages - all in real-time!
-
-## 🌟 What it Does
-
-1. **Speak** in your language → 2. **AI cleans up** the text → 3. **Translate** to any language
-
+ 
+A real-time speech recognition and translation web app. Speak in your language, get clean text, and instantly translate it into 60+ languages — no API keys required.
+ 
+---
+ 
 ## ✨ Features
-
-- 🎤 Speech recognition in 60+ languages
-- ✍️ Automatic grammar correction
-- 🌍 Translate to 60+ languages
-- 💎 Beautiful modern interface
-- 📱 Works on mobile & desktop
-- 🆓 100% Free (no API keys needed)
-
-## 🚀 Quick Start
-
-### Run Locally
-
+ 
+- 🎤 Speech recognition in 60+ languages via the browser's built-in Web Speech API
+- ✍️ Automatic text cleanup — capitalization, punctuation, spacing
+- 🌍 Translation to 60+ languages powered by Google Translate (free, no key needed)
+- 📱 Responsive design — works on desktop and mobile
+- ⚡ Fast and lightweight — no heavy frameworks or paid services
+ 
+---
+ 
+## 🛠️ Tech Stack
+ 
+| Layer | Technology |
+|---|---|
+| Backend | Python, Flask |
+| Frontend | HTML, CSS, JavaScript |
+| Speech Recognition | Web Speech API (browser built-in) |
+| Translation | Google Translate unofficial API |
+| Deployment | Vercel |
+ 
+---
+ 
+## 📁 Project Structure
+ 
+```
+speech-to-meaning/
+├── app.py                  # Flask backend — routes and translation logic
+├── requirements.txt        # Python dependencies
+├── vercel.json             # Vercel deployment configuration
+├── api/
+│   └── index.py            # Vercel serverless entry point
+├── templates/
+│   └── index.html          # Main frontend page
+└── static/
+    ├── css/
+    │   └── style.css       # Stylesheet
+    └── js/
+        └── main.js         # Speech and UI logic
+```
+ 
+---
+ 
+## 🚀 Running Locally
+ 
 ```bash
 # 1. Install dependencies
 pip install -r requirements.txt
-
-# 2. Run the app
+ 
+# 2. Start the app
 python app.py
-
-# 3. Open browser
+ 
+# 3. Open in browser
 http://localhost:5000
 ```
-
-### Deploy Online (Free)
-
-1. Sign up at [PythonAnywhere](https://www.pythonanywhere.com)
-2. Upload your files
-3. Install dependencies: `pip3 install --user -r requirements.txt`
-4. Create Flask web app
-5. Done! Your site is live 🎉
-
-## 📁 Files
-
+ 
+> Use **Chrome** for best speech recognition support.
+ 
+---
+ 
+## ☁️ Deploying to Vercel
+ 
+### Prerequisites
+- A [GitHub](https://github.com) account
+- A [Vercel](https://vercel.com) account (free — sign up with GitHub)
+ 
+### Step 1 — Add Vercel config files
+ 
+Create `vercel.json` in the root folder:
+ 
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app.py"
+    }
+  ]
+}
 ```
-speech-translator/
-├── app.py              # Backend (Flask)
-├── requirements.txt    # Dependencies
-├── templates/
-│   └── index.html     # Frontend HTML
-└── static/
-    ├── css/
-    │   └── style.css  # Styling
-    └── js/
-        └── main.js    # JavaScript
+ 
+Create `api/index.py`:
+ 
+```python
+from app import app
+ 
+handler = app
 ```
-
+ 
+### Step 2 — Push to GitHub
+ 
+Upload all project files to a new GitHub repository. Do **not** include the `venv/` folder.
+ 
+### Step 3 — Import to Vercel
+ 
+1. Go to [vercel.com/new](https://vercel.com/new)
+2. Import your GitHub repository
+3. Leave all settings as default
+4. Click **Deploy**
+ 
+Your app will be live at `https://your-project-name.vercel.app` within 1–2 minutes.
+ 
+> Vercel provides HTTPS automatically, which is required for the Web Speech API to work.
+ 
+---
+ 
 ## 🎯 How to Use
-
-1. Select your **input language** (what you'll speak)
-2. Select your **output language** (translation target)
-3. Click **"Start Recording"** and speak
-4. Click **"Stop Recording"**
-5. View your **translation**!
-
+ 
+1. Select your **input language** (the language you will speak)
+2. Select your **output language** (the translation target)
+3. Click **Start Recording** and speak
+4. Click **Stop Recording**
+5. Your cleaned-up text and translation will appear instantly
+ 
+---
+ 
 ## 🌐 Supported Languages
-
-60+ languages including:
-- English, Spanish, French, German, Italian, Portuguese
-- Chinese, Japanese, Korean, Arabic, Hindi, Bengali
-- Vietnamese, Sinhala, Thai, Indonesian, Malay, Filipino
-- And many more!
-
-## 🛠️ Built With
-
-- **Backend**: Python, Flask
-- **Frontend**: HTML, CSS, JavaScript
-- **Translation**: Google Translate API (free)
-- **Speech**: Web Speech API (browser built-in)
-
-## 📝 Requirements
-
-- Python 3.8+
-- Modern browser (Chrome recommended)
-- Internet connection
-
-## 🐛 Common Issues
-
-**Speech not working?**
-- Use Chrome browser
-- Allow microphone permissions
-- Make sure you're on HTTPS
-
-**Translation failed?**
-- Check internet connection
-- Verify language codes
+ 
+60+ languages including English, Spanish, French, German, Portuguese, Arabic, Hindi, Chinese, Japanese, Korean, Vietnamese, Sinhala, Thai, Indonesian, Bengali, Filipino, and more.
+ 
+---
+ 
+## 🐛 Troubleshooting
+ 
+**Microphone not working**
+- Use Chrome (Firefox and Safari have limited Web Speech API support)
+- Allow microphone permissions when prompted
+- Make sure the page is served over HTTPS
+ 
+**Translation shows `[Translation failed]`**
+- Check your internet connection
+- The Google Translate unofficial API may occasionally rate-limit — wait a moment and try again
+ 
+**Vercel deployment fails**
+- Ensure `requirements.txt` is in the root directory
+- Ensure `vercel.json` routes are configured exactly as shown above
+- Make sure `api/index.py` exists and imports `from app import app`
+ 
+---
+ 
+## 📝 License
+ 
+This project is open source and free to use.
